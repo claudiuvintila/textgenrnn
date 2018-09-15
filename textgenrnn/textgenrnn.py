@@ -306,7 +306,7 @@ class textgenrnn:
 
     def train_from_file(self, file_path, header=True, delim="\n",
                         new_model=False, context=None,
-                        is_csv=False, **kwargs):
+                        is_csv=False, callbacks=[], **kwargs):
 
         context_labels = None
         if context:
@@ -321,7 +321,7 @@ class textgenrnn:
             self.train_new_model(
                 texts, context_labels=context_labels, **kwargs)
         else:
-            self.train_on_texts(texts, context_labels=context_labels, **kwargs)
+            self.train_on_texts(texts, context_labels=context_labels, callbacks=callbacks, **kwargs)
 
     def train_from_largetext_file(self, file_path, new_model=True, callbacks=[], **kwargs):
         with open(file_path, 'r', encoding='utf8', errors='ignore') as f:
