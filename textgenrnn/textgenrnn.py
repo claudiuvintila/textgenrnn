@@ -33,7 +33,7 @@ class textgenrnn:
         'single_text': False
     }
     default_config = config.copy()
-
+    train_from_file
     def __init__(self, weights_path=None,
                  vocab_path=None,
                  config_path=None,
@@ -110,6 +110,7 @@ class textgenrnn:
                        via_new_model=False,
                        save_epochs=0,
                        multi_gpu=False,
+                       callbacks=[],
                        **kwargs):
 
         if new_model and not via_new_model:
@@ -206,7 +207,7 @@ class textgenrnn:
 
         model_t.fit_generator(gen, steps_per_epoch=steps_per_epoch,
                               epochs=num_epochs,
-                              callbacks=[
+                              callbacks=callbacks + [
                                   LearningRateScheduler(
                                       lr_linear_decay),
                                   generate_after_epoch(
@@ -288,6 +289,7 @@ class textgenrnn:
                             validation=validation,
                             save_epochs=save_epochs,
                             multi_gpu=multi_gpu,
+                            callbacks=[],
                             **kwargs)
 
     def save(self, weights_path="textgenrnn_weights_saved.hdf5"):
@@ -321,7 +323,7 @@ class textgenrnn:
         else:
             self.train_on_texts(texts, context_labels=context_labels, **kwargs)
 
-    def train_from_largetext_file(self, file_path, new_model=True, **kwargs):
+    def train_from_largetext_file(self, file_path, new_model=True, callbacks=[], **kwargs):
         with open(file_path, 'r', encoding='utf8', errors='ignore') as f:
             texts = [f.read()]
 
@@ -329,7 +331,7 @@ class textgenrnn:
             self.train_new_model(
                 texts, single_text=True, **kwargs)
         else:
-            self.train_on_texts(texts, single_text=True, **kwargs)
+            self.train_on_texts(texts, single_text=True, callbacks=callbacks, **kwargs)
 
     def generate_to_file(self, destination_path, **kwargs):
         texts = self.generate(return_as_list=True, **kwargs)
