@@ -33,7 +33,7 @@ class textgenrnn:
         'single_text': False
     }
     default_config = config.copy()
-    train_from_file
+
     def __init__(self, weights_path=None,
                  vocab_path=None,
                  config_path=None,
