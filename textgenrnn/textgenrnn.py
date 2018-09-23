@@ -160,7 +160,7 @@ class textgenrnn:
             print('start gen')
             gen_val_list = []
             for item in range(1, 10):
-                gen_val_list.append(gen_val().__next__())
+                gen_val_list.append(gen_val.__next__())
             gen_val = gen_val_list
             print('stop gen')
             val_steps = max(
