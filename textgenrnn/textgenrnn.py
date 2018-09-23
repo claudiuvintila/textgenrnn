@@ -218,7 +218,7 @@ class textgenrnn:
                                       save_epochs)],
                               verbose=verbose,
                               max_queue_size=10,
-                              validation_data=gen_val,
+                              validation_data=list(gen_val),
                               validation_steps=val_steps
                               )
 
