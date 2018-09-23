@@ -158,10 +158,10 @@ class textgenrnn:
             gen_val = generate_sequences_from_texts(
                 texts, indices_list_val, self, context_labels, batch_size)
             print('start gen')
-            gen_val_list = []
-            for item in range(1, 10):
-                gen_val_list.append(gen_val.__next__())
-            gen_val = gen_val_list
+            # gen_val_list = []
+            # for item in range(1, 10):
+            #     gen_val_list.append(gen_val.__next__())
+            gen_val = gen_val.append(gen_val.__next__())
             print('stop gen')
             val_steps = max(
                 int(np.floor(indices_list_val.shape[0] / batch_size)), 1)
