@@ -157,6 +157,7 @@ class textgenrnn:
             indices_list_val = indices_list[~indices_mask, :]
             gen_val = generate_sequences_from_texts(
                 texts, indices_list_val, self, context_labels, batch_size)
+            gen_val = list(gen_val)
             val_steps = max(
                 int(np.floor(indices_list_val.shape[0] / batch_size)), 1)
 
@@ -218,7 +219,7 @@ class textgenrnn:
                                       save_epochs)],
                               verbose=verbose,
                               max_queue_size=10,
-                              validation_data=list(gen_val),
+                              validation_data=gen_val,
                               validation_steps=val_steps
                               )
 
