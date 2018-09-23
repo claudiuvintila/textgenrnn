@@ -159,8 +159,8 @@ class textgenrnn:
                 texts, indices_list_val, self, context_labels, batch_size)
             print('start gen')
             gen_val_list = []
-            for item in gen_val:
-                gen_val_list.append(item)
+            for item in range(1, 10):
+                gen_val_list.append(gen_val())
             gen_val = gen_val_list
             print('stop gen')
             val_steps = max(
